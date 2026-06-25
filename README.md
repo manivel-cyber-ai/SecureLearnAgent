@@ -11,7 +11,7 @@ SecureLearn is a multi-agent system built using the Google ADK and powered by th
 
 ## 🏗️ Architecture
 
-![Architecture Diagram - /docs/architecture.png](docs/architecture.png)
+[Architecture Diagram - /docs/architecture.png]
 
 The project leverages four distinct sub-agents and a robust session memory system:
 
