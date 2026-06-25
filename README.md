@@ -11,7 +11,40 @@ SecureLearn is a multi-agent system built using the Google ADK and powered by th
 
 ## 🏗️ Architecture
 
-[Architecture Diagram - /docs/architecture.png]
+```mermaid
+graph TD
+    User([Student]) --> CLI[Interactive CLI<br/>main.py]
+    User --> MCPClient[MCP Client]
+
+    MCPClient --> MCPServer[MCP Server<br/>mcp_server.py]
+    
+    CLI --> ProfileMgr[Profile Manager<br/>profile_manager.py]
+    
+    subgraph AI Agents
+        CA[Curriculum Agent]
+        HA[CTF Hint Agent]
+        QA[Quiz Agent]
+        PA[Personalization Agent]
+    end
+    
+    CLI --> CA
+    CLI --> HA
+    CLI --> QA
+    CLI --> PA
+    
+    MCPServer --> CA
+    MCPServer --> QA
+    
+    PA -.Reads.-> ProfileMgr
+    QA -.Updates.-> ProfileMgr
+    
+    ProfileMgr <--> Data[(student_profile.json)]
+    
+    CA --> Gemini((Gemini API))
+    HA --> Gemini
+    QA --> Gemini
+    PA --> Gemini
+```
 
 The project leverages four distinct sub-agents and a robust session memory system:
 
